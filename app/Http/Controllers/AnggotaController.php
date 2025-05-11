@@ -10,12 +10,12 @@ class AnggotaController extends Controller
     public function index()
     {
         $anggota = Anggota::latest()->get();
-        return view('v_anggota.index', compact('anggota'))->with('judul', 'Data Anggota');
+        return view('anggota.index', compact('anggota'))->with('judul', 'Data Anggota');
     }
 
     public function create()
     {
-        return view('v_anggota.create')->with('judul', 'Tambah Anggota');
+        return view('anggota.create')->with('judul', 'Tambah Anggota');
     }
 
     public function store(Request $request)
@@ -26,19 +26,19 @@ class AnggotaController extends Controller
         ]);
 
         Anggota::create($validated);
-        return redirect()->route('v_anggota.index');
+        return redirect()->route('anggota.index');
     }
 
     public function destroy($id)
     {
         Anggota::destroy($id);
-        return redirect()->route('v_anggota.index');
+        return redirect()->route('anggota.index');
     }
 
     public function edit($id)
     {
         $anggota = Anggota::findOrFail($id);
-        return view('v_anggota.edit', compact('anggota'))->with('judul', 'Edit Anggota');
+        return view('anggota.edit', compact('anggota'))->with('judul', 'Edit Anggota');
     }
 
     public function update(Request $request, $id)
@@ -49,6 +49,6 @@ class AnggotaController extends Controller
             'hp' => 'required|min:10|max:13',
         ]);
         $anggota->update($validated);
-        return redirect()->route('v_anggota.index');
+        return redirect()->route('anggota.index');
     }
 }
