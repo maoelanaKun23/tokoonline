@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/icon_univ_bsi.png') }}">
-    <title>TOKO ONLINE</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/goat.svg') }}">
+    <title>QURBAN DISTRIBUTION</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/extralibs/multicheck/multicheck.css') }}">
 
     <link href="{{ asset('backend/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
@@ -36,14 +36,14 @@
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wisunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img style="width: 45px; height: auto;" src="https://images.icon-icons.com/2170/PNG/512/amazon_ecommerce_logo_brand_icon_133231.png" alt="amazonlogo" class="light-logo" />
+                            <img style="width: 45px; height: auto;" src="{{ asset('image/headgoat.svg') }}" alt="logo kambing" class="light-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img style="width: 160px; height: 40px;" src="https://upload.wikimedia.org/wikipedia/commons/1/16/Amazon_Prime_logo_%282023%29.png" alt="homepage" class="light-logo" />
+                            <img style="width: 150px; height: 40px;" src="{{ asset('image/distribution.svg') }}" alt="distribution" class="light-logo" />
 
                         </span>
                         <!-- Logo icon -->
@@ -88,7 +88,7 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
-                        
+
                         <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
                             <form class="app-search position-absolute">
                                 <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
@@ -167,7 +167,10 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <a class="dropdown-item" href="{{ route('backend.login') }}"
+                                    >
+                                    <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
                             </div>

@@ -9,8 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/icon_univ_bsi.png') }}">
-    <title>Toko Online</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/goat.svg') }}">
+    <title>QURBAN DISTRIBUTION</title>
     <!-- Custom CSS -->
     <link href="{{ asset(path: 'backend/dist/css/style.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,11 +38,11 @@
         <!-- ============================================================== -->
         <!-- Login box.scss -->
         <!-- ============================================================== -->
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
-            <div class="auth-box bg-dark border-top border-secondary">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background-color: #f0d000;">
+            <div class="auth-box border-top border-secondary" style="background-color: #f0d000;">
                 <div id="loginform">
                     <div class="text-center p-t-20 p-b-20">
-                        <span class="db"><img src="{{ asset('backend/images/logo.png') }}" alt="logo" /></span>
+                        <span class="db"><img src="{{ asset('image/goat.svg') }}" alt="logo" /></span>
                     </div>
                     <!-- Form -->
                      <!-- error --> 
