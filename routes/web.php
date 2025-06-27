@@ -17,3 +17,8 @@ Route::post('backend/logout', [LoginController::class, 'logoutBackend']) ->name(
 
 // Route::resource('backend/user', UserController::class)->middleware('auth'); 
 Route::resource('backend/user', UserController::class, ['as' => 'backend']) ->middleware('auth');
+
+use App\Http\Controllers\RegisterController;
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
