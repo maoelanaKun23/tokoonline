@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('lokasi', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('email')->unique();
-            $table->string('role');
-            $table->string('status');
-            $table->string('password');
-            $table->string('hp');
-            $table->string('foto')->nullable(); // Menambahkan kolom foto jika ada file gambar
+            $table->string('nama_desa');
+            $table->string('rt')->nullable();
+            $table->string('rw')->nullable();
+            $table->unsignedBigInteger('admin_id'); // relasi ke admin
             $table->timestamps();
+        
+            $table->foreign('admin_id')->references('id')->on('user')->onDelete('cascade');
         });
+        
     }
 
     /**
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('lokasi');
     }
 };
