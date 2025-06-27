@@ -167,8 +167,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('backend.login') }}"
-                                    >
+                                <a class="dropdown-item" href="{{ route('backend.login') }}">
                                     <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout
                                 </a>
                                 <div class="dropdown-divider"></div>
@@ -179,33 +178,93 @@
                 </div>
             </nav>
         </header>
+        <!-- resources/views/backend/layouts/sidebar.blade.php -->
         <aside class="left-sidebar" data-sidebarbg="skin5">
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.beranda') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Beranda</span></a>
+                        {{-- Dashboard --}}
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.beranda') }}" aria-expanded="false">
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span class="hide-menu">Beranda</span>
+                            </a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.user.index') }}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">User</span></a>
+
+                        @if(Auth::user()->role == 1 || Auth::user()->role == 0 || Auth::user()->role == 'admin')
+                        {{-- Menu untuk Super Admin & Admin --}}
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false">
+                                <i class="mdi mdi-account"></i>
+                                <span class="hide-menu">User</span>
+                            </a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-shopping"></i><span class="hide-menu">Data Produk </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="icon-material.html" class="sidebar-link"><i class="mdi mdi-chevron-right"></i><span class="hide-menu"> Kategori </span></a>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false">
+                                <i class="mdi mdi-map-marker"></i>
+                                <span class="hide-menu">Data Lokasi</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark"  aria-expanded="false">
+                                <i class="mdi mdi-shopping"></i>
+                                <span class="hide-menu">Data Produk</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a  class="sidebar-link">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="hide-menu">Kategori</span>
+                                    </a>
                                 </li>
-                                <li class="sidebar-item"><a href="icon-fontawesome.html" class="sidebar-link"><i class="mdi mdi-chevron-right"></i><span class="hide-menu"> Produk </span></a>
+                                <li class="sidebar-item">
+                                    <a  class="sidebar-link">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="hide-menu">Produk</span>
+                                    </a>
                                 </li>
                             </ul>
+                        </li>
+                        @elseif(Auth::user()->role == 'user')
+                        {{-- Menu untuk User (panitia kurban) --}}
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false">
+                                <i class="mdi mdi-calendar-check"></i>
+                                <span class="hide-menu">Input Data Kurban</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false">
+                                <i class="mdi mdi-history"></i>
+                                <span class="hide-menu">Riwayat Kurban</span>
+                            </a>
+                        </li>
+                        @endif
+
+                        {{-- Logout --}}
+                        <li class="sidebar-item">
+                            <form action="{{ route('backend.logout') }}" method="POST" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-link sidebar-link" style="color: #ccc; text-align: left; width: 100%; padding-left: 30px;">
+                                    <i class="mdi mdi-logout"></i>
+                                    <span class="hide-menu">Logout</span>
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </nav>
             </div>
         </aside>
+
         <div class="page-wrapper">
             <div class="container-fluid">
                 @yield('content')
                 <div class="page-breadcrumb">
                     <div class="row">
                         <div class="col-12 d-flex no-block align-items-center">
-                            <h4 class="page-title">Tables</h4>
                             <div class="ml-auto text-right">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -222,173 +281,6 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title m-b-0">Static Table</h5>
-                                </div>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title m-b-0">Static Table With Checkboxes</h5>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox m-b-20">
-                                                        <input type="checkbox" id="mainCheckbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <th scope="col">Rendering engine</th>
-                                                <th scope="col">Browser</th>
-                                                <th scope="col">Platform(s)</th>
-                                                <th scope="col">Engine version</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="customtable">
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 4.0</td>
-                                                <td>Win 95+</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 5.0</td>
-                                                <td>Win 95+</td>
-                                                <td>5</td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 4.0</td>
-                                                <td>Win 95+</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 5.0</td>
-                                                <td>Win 95+</td>
-                                                <td>5</td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 5.5</td>
-                                                <td>Win 95+</td>
-                                                <td>5.5</td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 6</td>
-                                                <td>Win 98+</td>
-                                                <td>6</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Collspan Table Example</h5>
-                                </div>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Basic Datatable</h5>
                                     <div class="table-responsive">
                                         <table id="zero_config" class="table table-striped table-bordered">
                                             <thead>

@@ -8,15 +8,15 @@ class RemoveNameFromUserTable extends Migration
 {
     public function up()
     {
-        Schema::table('user', function (Blueprint $table) {
-            $table->dropColumn('name');
-        });
+        // Schema::table('user', function (Blueprint $table) {
+        //     $table->dropColumn('name');
+        // });
     }
 
     public function down()
     {
-        Schema::table('user', function (Blueprint $table) {
-            $table->string('name');
-        });
+        // Schema::table('user', function (Blueprint $table) {
+        //     $table->string('name');
+        // });
     }
 }

@@ -9,11 +9,11 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        // Schema::table('user', function (Blueprint $table) {
-        //     $table->string('status')->default('active');
-        // });
+        Schema::table('user', function (Blueprint $table) {
+            //
+        });
     }
 
     /**
