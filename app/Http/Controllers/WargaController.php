@@ -37,10 +37,14 @@ class WargaController extends Controller
             'gaji' => 'required|numeric|min:0',
             'lokasi_id' => 'required|exists:lokasi,id',
         ]);
-
-        Warga::create($request->all());
-
+        $lokasi = Lokasi::find($request->lokasi_id);
+        $prioritas = $request->gaji < $lokasi->umr ? true : false;
+        Warga::create(array_merge($request->all(), ['prioritas' => $prioritas]));
         return redirect()->route('backend.warga.index')->with('success', 'Data warga berhasil ditambahkan.');
+
+        // Warga::create($request->all());
+
+        // return redirect()->route('backend.warga.index')->with('success', 'Data warga berhasil ditambahkan.');
     }
 
     public function edit(Warga $warga)
@@ -60,10 +64,16 @@ class WargaController extends Controller
             'desa' => 'required|string|max:255',
             'lokasi_id' => 'required|exists:lokasi,id',
         ]);
+        $lokasi = Lokasi::find($request->lokasi_id);
+        $prioritas = $request->gaji < $lokasi->umr ? true : false;
 
-        $warga->update($request->all());
+        Warga::create(array_merge($request->all(), ['prioritas' => $prioritas]));
 
-        return redirect()->route('backend.warga.index')->with('success', 'Data warga berhasil diperbarui.');
+        return redirect()->route('backend.warga.index')->with('success', 'Data warga berhasil ditambahkan.');
+
+        // $warga->update($request->all());
+
+        // return redirect()->route('backend.warga.index')->with('success', 'Data warga berhasil diperbarui.');
     }
 
     public function destroy(Warga $warga)

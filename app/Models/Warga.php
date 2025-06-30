@@ -20,6 +20,7 @@ class Warga extends Model
         'desa',
         'lokasi_id',
         'gaji',
+        'prioritas',
     ];
 
     public function lokasi()

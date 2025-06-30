@@ -25,6 +25,7 @@
                                     <th>RW</th>
                                     <th>Gaji</th>
                                     <th>Lokasi</th>
+                                    <th>Prioritas</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -39,6 +40,7 @@
                                         <td>{{ $warga->rw }}</td>
                                         <td>{{ $warga->gaji }}</td>
                                         <td>{{ $warga->lokasi->nama_desa ?? '-' }}</td>
+                                        <td>{{ $warga->prioritas ? 'Ya' : 'Tidak' }}</td>
                                         <td>
                                             <a href="{{ route('backend.warga.edit', $warga->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                             <form action="{{ route('backend.warga.destroy', $warga->id) }}" method="POST" style="display:inline-block">
