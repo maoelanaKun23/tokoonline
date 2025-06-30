@@ -201,7 +201,7 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                            <a href="{{ route('backend.lokasi.index') }}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                                 <i class="mdi mdi-map-marker"></i>
                                 <span class="hide-menu">Data Lokasi</span>
                             </a>
