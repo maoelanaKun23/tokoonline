@@ -194,33 +194,33 @@
                         @if(Auth::user()->role == 1 || Auth::user()->role == 0 || Auth::user()->role == 'admin')
                         {{-- Menu untuk Super Admin & Admin --}}
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false">
+                            <a href="{{ route('backend.warga.index') }}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                                 <i class="mdi mdi-account"></i>
-                                <span class="hide-menu">User</span>
+                                <span class="hide-menu">Warga</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                                 <i class="mdi mdi-map-marker"></i>
                                 <span class="hide-menu">Data Lokasi</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark"  aria-expanded="false">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" aria-expanded="false">
                                 <i class="mdi mdi-shopping"></i>
                                 <span class="hide-menu">Data Produk</span>
                             </a>
                             <ul aria-expanded="false" class="collapse first-level">
                                 <li class="sidebar-item">
-                                    <a  class="sidebar-link">
+                                    <a class="sidebar-link">
                                         <i class="mdi mdi-chevron-right"></i>
                                         <span class="hide-menu">Kategori</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a  class="sidebar-link">
+                                    <a class="sidebar-link">
                                         <i class="mdi mdi-chevron-right"></i>
                                         <span class="hide-menu">Produk</span>
                                     </a>
@@ -230,14 +230,14 @@
                         @elseif(Auth::user()->role == 'user')
                         {{-- Menu untuk User (panitia kurban) --}}
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                                 <i class="mdi mdi-calendar-check"></i>
                                 <span class="hide-menu">Input Data Kurban</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                                 <i class="mdi mdi-history"></i>
                                 <span class="hide-menu">Riwayat Kurban</span>
                             </a>
@@ -262,7 +262,7 @@
         <div class="page-wrapper">
             <div class="container-fluid">
                 @yield('content')
-                <div class="page-breadcrumb">
+                <!-- <div class="page-breadcrumb">
                     <div class="row">
                         <div class="col-12 d-flex no-block align-items-center">
                             <div class="ml-auto text-right">
@@ -275,8 +275,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="container-fluid">
+                </div> -->
+                <!-- <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -768,7 +768,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <script src="{{ asset('backend/libs/jquery/dist/jquery.min.js') }}"></script>
