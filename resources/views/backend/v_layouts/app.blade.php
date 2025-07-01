@@ -214,9 +214,9 @@
                             </a>
                             <ul aria-expanded="false" class="collapse first-level">
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link">
+                                    <a class="sidebar-link" href="{{ route('backend.kurban.index') }}">
                                         <i class="mdi mdi-chevron-right"></i>
-                                        <span class="hide-menu">Kategori</span>
+                                        <span class="hide-menu">Kurban</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">

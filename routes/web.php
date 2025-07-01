@@ -7,6 +7,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LokasiController;
+use App\Http\Controllers\KurbanController;
+use App\Http\Controllers\DistribusiQurbanController;
+
 
 
 Route::get('/', function () {
@@ -28,3 +31,7 @@ Route::resource('backend/warga', WargaController::class, ['as' => 'backend'])
 
 Route::resource('backend/lokasi', LokasiController::class, ['as' => 'backend'])
     ->middleware('auth');
+
+Route::resource('backend/kurban', KurbanController::class, ['as' => 'backend'])
+    ->middleware('auth');
+Route::resource('backend/distribusi_qurban', DistribusiQurbanController::class)->middleware('auth');
