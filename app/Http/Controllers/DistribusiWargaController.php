@@ -7,6 +7,8 @@ use App\Models\DistribusiQurban;
 use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class DistribusiWargaController extends Controller
 {
@@ -24,22 +26,6 @@ class DistribusiWargaController extends Controller
         return view('backend.distribusi_warga.index', compact('distribusis'));
     }
 
-    // public function create()
-    // {
-    //     $user = Auth::user();
-
-    //     // Ambil distribusi untuk panitia ini
-    //     $distribusiQurban = DistribusiQurban::where('panitia_id', $user->id)->get();
-
-    //     // Ambil warga berdasarkan lokasi (desa) si panitia
-    //     $lokasiId = $user->lokasi_id ?? $user->admin->lokasi_id ?? null;
-
-    //     $wargas = \App\Models\Warga::where('lokasi_id', $lokasiId)
-    //         ->orderBy('rw')
-    //         ->get();
-
-    //     return view('backend.distribusi_warga.create', compact('distribusiQurban', 'wargas'));
-    // }
     public function create()
     {
         $user = Auth::user();
@@ -49,26 +35,6 @@ class DistribusiWargaController extends Controller
         return view('backend.distribusi_warga.create', compact('distribusiQurban', 'rws'));
     }
 
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'distribusi_id' => 'required|exists:distribusi_qurban,id',
-    //         'warga_id' => 'required|exists:warga,id',
-    //         'jumlah_daging' => 'required|numeric|min:0.01',
-    //         'status' => 'nullable|string',
-    //         'keterangan' => 'nullable|string',
-    //     ]);
-
-    //     DistribusiWarga::create([
-    //         'distribusi_id' => $request->distribusi_id,
-    //         'warga_id' => $request->warga_id,
-    //         'jumlah_daging' => $request->jumlah_daging,
-    //         'status' => $request->status ?? 'pending',
-    //         'keterangan' => $request->keterangan,
-    //     ]);
-
-    //     return redirect()->route('backend.distribusi_warga.index')->with('success', 'Distribusi ke warga berhasil disimpan.');
-    // }
     public function store(Request $request)
     {
         $request->validate([
@@ -122,4 +88,24 @@ class DistribusiWargaController extends Controller
 
         return view('backend.distribusi_warga.detail_rw', compact('distribusi', 'prioritas', 'nonPrioritas'));
     }
+
+    public function downloadDetailPdf($id)
+    {
+        $distribusi = DistribusiWarga::with('distribusi.kurban')->findOrFail($id);
+
+        $prioritas = \App\Models\Warga::where('rw', $distribusi->rw)
+            ->where('prioritas', 1)
+            ->orderBy('gaji', 'asc')
+            ->get();
+
+        $nonPrioritas = \App\Models\Warga::where('rw', $distribusi->rw)
+            ->where('prioritas', 0)
+            ->orderBy('gaji', 'asc')
+            ->get();
+
+        $pdf = Pdf::loadView('backend.distribusi_warga.detail_rw_pdf', compact('distribusi', 'prioritas', 'nonPrioritas'));
+
+        return $pdf->download('detail_rw_' . $distribusi->rw . '.pdf');
+    }
+    
 }

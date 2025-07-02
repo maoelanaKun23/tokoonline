@@ -48,9 +48,20 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
         ->except(['show'])
         ->parameters(['panitia' => 'panitia']);
 });
-// // routes/web.php
 Route::get(
     'backend/distribusi_warga/{id}/detail',
     [DistribusiWargaController::class, 'showDetailRW']
 )->name('backend.distribusi_warga.detail');
+Route::get('backend/distribusi_warga/{id}/detail-pdf', [DistribusiWargaController::class, 'downloadDetailPdf'])->name('backend.distribusi_warga.download_pdf');
+Route::prefix('backend')->name('backend.')->group(function () {
+    Route::resource('warga', WargaController::class);
+
+    Route::get('warga/import', [WargaController::class, 'showImportForm'])->name('warga.import_form');
+    Route::post('warga/import', [WargaController::class, 'import'])->name('warga.import');
+});
+
+
+
+
+
 

@@ -13,6 +13,8 @@
         Admin
         @elseif(Auth::user()->role == 'user')
         User
+        @elseif(Auth::user()->role == 'panitia')
+        Panitia
         @else
         Role tidak dikenal
         @endif

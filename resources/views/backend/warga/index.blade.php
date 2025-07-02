@@ -12,6 +12,10 @@
                     @endif
                     <div class="mb-3 text-right">
                         <a href="{{ route('backend.warga.create') }}" class="btn btn-success">Tambah Warga</a>
+                        <!-- Tombol untuk buka modal upload -->
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importExcelModal">
+                            Import Data Warga (Excel)
+                        </button>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered">
@@ -58,5 +62,32 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Modal Import Excel -->
+<div class="modal fade" id="importExcelModal" tabindex="-1" role="dialog" aria-labelledby="importExcelModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form action="{{ route('backend.warga.import') }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="importExcelModalLabel">Import Data Warga dari Excel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="excelFile">Pilih file Excel (.xls, .xlsx)</label>
+            <input type="file" name="excel_file" class="form-control" id="excelFile" accept=".xls,.xlsx" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 @endsection
