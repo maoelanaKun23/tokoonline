@@ -191,7 +191,7 @@
                             </a>
                         </li>
 
-                        @if(Auth::user()->role == 1 || Auth::user()->role == 0 || Auth::user()->role == 'admin')
+                        @if(Auth::user()->role == 1 || Auth::user()->role == 0 || Auth::user()->role == 'admin'|| Auth::user()->role == 'panitia')
                         {{-- Menu untuk Super Admin & Admin --}}
                         <li class="sidebar-item">
                             <a href="{{ route('backend.warga.index') }}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
@@ -240,7 +240,7 @@
                                 </li>
                             </ul>
                         </li>
-                        @elseif(Auth::user()->role == 'panitia')
+                        @elseif(Auth::user()->role == 'panitia' || Auth::user()->role == 'admin')
                         {{-- Menu untuk User (panitia kurban) --}}
                         <!-- <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">

@@ -48,4 +48,5 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
         ->except(['show'])
         ->parameters(['panitia' => 'panitia']);
 });
+Route::get('distribusi_warga/{id}/detail', [DistribusiWargaController::class, 'detail'])->name('backend.distribusi_warga.detail');
 

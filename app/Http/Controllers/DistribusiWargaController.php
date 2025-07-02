@@ -79,24 +79,38 @@ class DistribusiWargaController extends Controller
             'keterangan' => 'nullable|string',
         ]);
 
-        $wargas = Warga::where('rw', $request->rw)->get();
+        // Cek apakah sudah pernah disimpan distribusi untuk RW ini
+        $existing = DistribusiWarga::where('distribusi_id', $request->distribusi_id)
+            ->where('rw', $request->rw)
+            ->first();
 
-        foreach ($wargas as $warga) {
-            DistribusiWarga::create([
-                'distribusi_id' => $request->distribusi_id,
-                'warga_id' => $warga->id,
-                'jumlah_daging' => $request->jumlah_daging,
-                'status' => $request->status ?? 'pending',
-                'keterangan' => $request->keterangan,
-            ]);
+        if ($existing) {
+            return redirect()->back()->withErrors('Distribusi ke RW ini sudah pernah dibuat.');
         }
 
-        return redirect()->route('backend.distribusi_warga.index')->with('success', 'Distribusi berhasil untuk RW ' . $request->rw);
+        DistribusiWarga::create([
+            'distribusi_id' => $request->distribusi_id,
+            'rw' => $request->rw,
+            'jumlah_daging' => $request->jumlah_daging,
+            'status' => $request->status ?? 'pending',
+            'keterangan' => $request->keterangan,
+        ]);
+
+        return redirect()->route('backend.distribusi_warga.index')->with('success', 'Distribusi RW berhasil disimpan.');
     }
+
 
     public function destroy(DistribusiWarga $distribusiWarga)
     {
         $distribusiWarga->delete();
         return redirect()->route('backend.distribusi_warga.index')->with('success', 'Distribusi warga berhasil dihapus.');
+    }
+
+    public function detail($id)
+    {
+        $distribusi = DistribusiWarga::findOrFail($id);
+        $wargas = Warga::where('rw', $distribusi->rw)->get();
+
+        return view('backend.distribusi_warga.detail', compact('distribusi', 'wargas'));
     }
 }

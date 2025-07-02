@@ -14,6 +14,7 @@ class DistribusiWarga extends Model
     protected $fillable = [
         'distribusi_id',
         'warga_id',
+        'rw',
         'jumlah_daging',
         'status',
         'keterangan',
@@ -27,5 +28,10 @@ class DistribusiWarga extends Model
     public function warga()
     {
         return $this->belongsTo(Warga::class, 'warga_id');
+    }
+
+    public function wargaRW()
+    {
+        return Warga::where('rw', $this->rw)->get();
     }
 }

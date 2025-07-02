@@ -5,7 +5,7 @@
     <h4>Daftar Distribusi ke Warga</h4>
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     <a href="{{ route('backend.distribusi_warga.create') }}" class="btn btn-primary mb-3">Tambah Distribusi ke Warga</a>
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($distribusis as $d)
+            <!-- @forelse ($distribusis as $d)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $d->distribusi->kurban->jenis ?? '-' }}</td>
@@ -41,7 +41,25 @@
             </tr>
             @empty
             <tr><td colspan="7" class="text-center">Tidak ada data distribusi ke warga</td></tr>
-            @endforelse
+            @endforelse -->
+            @foreach ($distribusis as $d)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $d->distribusi->kurban->jenis ?? '-' }}</td>
+                <td>RW {{ $d->rw }}</td>
+                <td>{{ number_format($d->jumlah_daging, 2) }}</td>
+                <td>{{ ucfirst($d->status) }}</td>
+                <td>{{ $d->keterangan ?? '-' }}</td>
+                <td>
+                    <a href="{{ route('backend.distribusi_warga.detail', $d->id) }}" class="btn btn-info btn-sm">Detail</a>
+                    <form action="{{ route('backend.distribusi_warga.destroy', $d->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Yakin hapus?')">
+                        @csrf @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+
         </tbody>
     </table>
 </div>
