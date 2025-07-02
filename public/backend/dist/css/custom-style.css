@@ -1,0 +1,33 @@
+/* Navbar background */
+.topbar, .navbar-header, [data-navbarbg="skin5"] {
+    background-color: #f0d000 !important;
+}
+
+/* Sidebar background */
+.left-sidebar, [data-sidebarbg="skin5"] {
+    background-color: #f0d000 !important;
+}
+
+/* Aktif menu */
+.sidebar-nav ul li a.active, .sidebar-nav ul li a:hover {
+    background-color: #fff8b0 !important;
+    color: #000 !important;
+}
+
+/* Icon warna sidebar */
+.sidebar-nav ul li a i {
+    color: #000 !important;
+}
+
+/* Button utama */
+.btn-primary, .btn-success, .btn-info {
+    background-color: #f0d000 !important;
+    border-color: #f0d000 !important;
+    color: #000 !important;
+}
+
+/* Dropdown hover */
+.dropdown-menu .dropdown-item:hover {
+    background-color: #fff8b0 !important;
+    color: #000 !important;
+}
