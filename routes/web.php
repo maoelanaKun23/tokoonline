@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\KurbanController;
 use App\Http\Controllers\DistribusiQurbanController;
+use App\Http\Controllers\DistribusiWargaController;
 
 
 
@@ -32,6 +33,19 @@ Route::resource('backend/warga', WargaController::class, ['as' => 'backend'])
 Route::resource('backend/lokasi', LokasiController::class, ['as' => 'backend'])
     ->middleware('auth');
 
-Route::resource('backend/kurban', KurbanController::class, ['as' => 'backend'])
-    ->middleware('auth');
-Route::resource('backend/distribusi_qurban', DistribusiQurbanController::class)->middleware('auth');
+// Route::resource('backend/kurban', KurbanController::class, ['as' => 'backend'])
+//     ->middleware('auth');
+// Route::resource('backend/distribusi_qurban', DistribusiQurbanController::class)->middleware('auth');
+Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function () {
+    Route::resource('kurban', KurbanController::class);
+
+    Route::resource('distribusi_qurban', DistribusiQurbanController::class);
+
+    Route::resource('distribusi_warga', DistribusiWargaController::class);
+});
+Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function () {
+    Route::resource('panitia', \App\Http\Controllers\PanitiaController::class)
+        ->except(['show'])
+        ->parameters(['panitia' => 'panitia']);
+});
+

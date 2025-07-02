@@ -201,6 +201,13 @@
                         </li>
 
                         <li class="sidebar-item">
+                            <a href="{{ route('backend.panitia.index') }}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                                <i class="mdi mdi-account"></i>
+                                <span class="hide-menu">Panitia</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
                             <a href="{{ route('backend.lokasi.index') }}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                                 <i class="mdi mdi-map-marker"></i>
                                 <span class="hide-menu">Data Lokasi</span>
@@ -210,7 +217,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" aria-expanded="false">
                                 <i class="mdi mdi-shopping"></i>
-                                <span class="hide-menu">Data Produk</span>
+                                <span class="hide-menu">Data Kurban</span>
                             </a>
                             <ul aria-expanded="false" class="collapse first-level">
                                 <li class="sidebar-item">
@@ -220,16 +227,22 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link">
+                                    <a class="sidebar-link" href="{{ route('backend.distribusi_qurban.index') }}">
                                         <i class="mdi mdi-chevron-right"></i>
-                                        <span class="hide-menu">Produk</span>
+                                        <span class="hide-menu">Distribusi Kurban</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('backend.distribusi_warga.index') }}">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="hide-menu">Distribusi Warga</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        @elseif(Auth::user()->role == 'user')
+                        @elseif(Auth::user()->role == 'panitia')
                         {{-- Menu untuk User (panitia kurban) --}}
-                        <li class="sidebar-item">
+                        <!-- <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                                 <i class="mdi mdi-calendar-check"></i>
                                 <span class="hide-menu">Input Data Kurban</span>
@@ -241,6 +254,32 @@
                                 <i class="mdi mdi-history"></i>
                                 <span class="hide-menu">Riwayat Kurban</span>
                             </a>
+                        </li> -->
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" aria-expanded="false">
+                                <i class="mdi mdi-shopping"></i>
+                                <span class="hide-menu">Data Kurban</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('backend.kurban.index') }}">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="hide-menu">Kurban</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('backend.distribusi_qurban.index') }}">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="hide-menu">Distribusi Kurban</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('backend.distribusi_warga.index') }}">
+                                        <i class="mdi mdi-chevron-right"></i>
+                                        <span class="hide-menu">Distribusi Warga</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         @endif
 

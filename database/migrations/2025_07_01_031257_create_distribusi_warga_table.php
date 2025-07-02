@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('distribusi_qurban', function (Blueprint $table) {
+        Schema::create('distribusi_warga', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kurban_id')->constrained('kurban')->onDelete('cascade');
-            $table->foreignId('panitia_id')->constrained('user')->onDelete('cascade');
+            $table->foreignId('distribusi_id')->constrained('distribusi_qurban')->onDelete('cascade');
+            $table->foreignId('warga_id')->constrained('warga')->onDelete('cascade');
             $table->decimal('jumlah_daging', 8, 2);
-            $table->string('status')->default('pending');
+            $table->string('status')->default('pending'); // bisa pending / diterima / ditolak
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });
@@ -20,6 +20,7 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('distribusi_qurban');
+        Schema::dropIfExists('distribusi_warga');
     }
 };
+

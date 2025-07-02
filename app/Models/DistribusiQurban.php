@@ -11,22 +11,29 @@ class DistribusiQurban extends Model
 
     protected $table = 'distribusi_qurban'; // nama tabel
 
-    // Kolom yang boleh diisi mass assignment
     protected $fillable = [
-        'warga_id',
         'kurban_id',
+        'panitia_id',
         'jumlah_daging',
+        'status',
+        'keterangan',
     ];
 
-    // Relasi ke Warga (yang menerima distribusi)
-    public function warga()
-    {
-        return $this->belongsTo(Warga::class, 'warga_id');
-    }
-
-    // Relasi ke Kurban (jenis kurban yang didistribusikan)
+    // Relasi ke kurban
     public function kurban()
     {
         return $this->belongsTo(Kurban::class, 'kurban_id');
+    }
+
+    // Relasi ke panitia (user yang menerima distribusi)
+    public function panitia()
+    {
+        return $this->belongsTo(User::class, 'panitia_id');
+    }
+
+    // Relasi ke distribusi_warga (lanjutan distribusi dari panitia ke warga)
+    public function wargaDistribusi()
+    {
+        return $this->hasMany(DistribusiWarga::class, 'distribusi_id');
     }
 }
