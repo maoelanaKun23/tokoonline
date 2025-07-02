@@ -106,11 +106,20 @@ class DistribusiWargaController extends Controller
         return redirect()->route('backend.distribusi_warga.index')->with('success', 'Distribusi warga berhasil dihapus.');
     }
 
-    public function detail($id)
+    public function showDetailRW($id)
     {
-        $distribusi = DistribusiWarga::findOrFail($id);
-        $wargas = Warga::where('rw', $distribusi->rw)->get();
+        $distribusi = DistribusiWarga::with('distribusi.kurban')->findOrFail($id);
 
-        return view('backend.distribusi_warga.detail', compact('distribusi', 'wargas'));
+        $prioritas = \App\Models\Warga::where('rw', $distribusi->rw)
+            ->where('prioritas', 1)
+            ->orderBy('gaji', 'asc')
+            ->get();
+
+        $nonPrioritas = \App\Models\Warga::where('rw', $distribusi->rw)
+            ->where('prioritas', 0)
+            ->orderBy('gaji', 'asc')
+            ->get();
+
+        return view('backend.distribusi_warga.detail_rw', compact('distribusi', 'prioritas', 'nonPrioritas'));
     }
 }

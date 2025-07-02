@@ -51,7 +51,8 @@
                 <td>{{ ucfirst($d->status) }}</td>
                 <td>{{ $d->keterangan ?? '-' }}</td>
                 <td>
-                    <a href="{{ route('backend.distribusi_warga.detail', $d->id) }}" class="btn btn-info btn-sm">Detail</a>
+                    <a href="{{ route('backend.distribusi_warga.detail', $d->id) }}"
+                        class="btn btn-info btn-sm">Detail</a>
                     <form action="{{ route('backend.distribusi_warga.destroy', $d->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Yakin hapus?')">
                         @csrf @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
